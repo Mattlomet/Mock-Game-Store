@@ -1,0 +1,631 @@
+swagger: '2.0'
+info:
+  description: A service that allows users to purchase a game, console, or t-shirt
+  version: '1.0'
+  title: Game Store
+  termsOfService: 'urn:tos'
+  contact: {}
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0'
+host: 'localhost:8080'
+basePath: /
+tags:
+  - name: console-controller
+    description: Console Controller
+  - name: game-controller
+    description: Game Controller
+  - name: purchase-item-controller
+    description: Purchase Item Controller
+  - name: t-shirt-controller
+    description: T Shirt Controller
+paths:
+  '/color/{color}':
+    get:
+      tags:
+        - t-shirt-controller
+      summary: getTshirtByColor
+      operationId: getTshirtByColorUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: color
+          in: path
+          description: color
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TShirtViewModel'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /console:
+    post:
+      tags:
+        - console-controller
+      summary: createConsole
+      operationId: createConsoleUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: console
+          description: console
+          required: true
+          schema:
+            $ref: '#/definitions/ConsoleViewModel'
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/ConsoleViewModel'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - console-controller
+      summary: updateConsole
+      operationId: updateConsoleUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: console
+          description: console
+          required: true
+          schema:
+            $ref: '#/definitions/ConsoleViewModel'
+      responses:
+        '201':
+          description: Created
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/console/{id}':
+    get:
+      tags:
+        - console-controller
+      summary: getConsoleById
+      operationId: getConsoleByIdUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ConsoleViewModel'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - console-controller
+      summary: deleteConsole
+      operationId: deleteConsoleUsingDELETE
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+  '/esrb/{esrb}':
+    get:
+      tags:
+        - game-controller
+      summary: getGameByEsrb
+      operationId: getGameByEsrbUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: esrb
+          in: path
+          description: esrb
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/GameViewModel'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /game:
+    post:
+      tags:
+        - game-controller
+      summary: createGame
+      operationId: createGameUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: game
+          description: game
+          required: true
+          schema:
+            $ref: '#/definitions/GameViewModel'
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/GameViewModel'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - game-controller
+      summary: updateGame
+      operationId: updateGameUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: game
+          description: game
+          required: true
+          schema:
+            $ref: '#/definitions/GameViewModel'
+      responses:
+        '201':
+          description: Created
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/game/{id}':
+    get:
+      tags:
+        - game-controller
+      summary: getGameById
+      operationId: GET
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/GameViewModel'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - game-controller
+      summary: deleteGame
+      operationId: deleteGameUsingDELETE
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+  '/manufacturer/{manu}':
+    get:
+      tags:
+        - console-controller
+      summary: getConsoleByManufacturer
+      operationId: getConsoleByManufacturerUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: manu
+          in: path
+          description: manu
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ConsoleViewModel'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /purchase:
+    post:
+      tags:
+        - purchase-item-controller
+      summary: purchaseItem
+      operationId: purchaseItemUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: ivm
+          description: ivm
+          required: true
+          schema:
+            $ref: '#/definitions/InvoiceViewModel'
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/InvoiceViewModel'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/size/{size}':
+    get:
+      tags:
+        - t-shirt-controller
+      summary: getTshirtBySize
+      operationId: getTshirtBySizeUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: size
+          in: path
+          description: size
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TShirtViewModel'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/studio/{studio}':
+    get:
+      tags:
+        - game-controller
+      summary: getGameByStudio
+      operationId: getGameByStudioUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: studio
+          in: path
+          description: studio
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/GameViewModel'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/title/{title}':
+    get:
+      tags:
+        - game-controller
+      summary: getGameByTitle
+      operationId: getGameByTitleUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: title
+          in: path
+          description: title
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/GameViewModel'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /tshirt:
+    post:
+      tags:
+        - t-shirt-controller
+      summary: createTshirt
+      operationId: createTshirtUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: tShirt
+          description: tShirt
+          required: true
+          schema:
+            $ref: '#/definitions/TShirtViewModel'
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/TShirtViewModel'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - t-shirt-controller
+      summary: updateTshirt
+      operationId: updateTshirtUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: tShirt
+          description: tShirt
+          required: true
+          schema:
+            $ref: '#/definitions/TShirtViewModel'
+      responses:
+        '201':
+          description: Created
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/tshirt/{id}':
+    get:
+      tags:
+        - t-shirt-controller
+      summary: getTshirtById
+      operationId: getTshirtByIdUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TShirtViewModel'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - t-shirt-controller
+      summary: deleteTshirt
+      operationId: deleteTshirtUsingDELETE
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+definitions:
+  ConsoleViewModel:
+    type: object
+    properties:
+      console_id:
+        type: integer
+        format: int32
+      manufacturer:
+        type: string
+      memory_amount:
+        type: string
+      model:
+        type: string
+      price:
+        type: number
+      processor:
+        type: string
+      quantity:
+        type: integer
+        format: int32
+    title: ConsoleViewModel
+  GameViewModel:
+    type: object
+    properties:
+      description:
+        type: string
+      esrb_rating:
+        type: string
+      game_id:
+        type: integer
+        format: int32
+      price:
+        type: number
+      quantity:
+        type: integer
+        format: int32
+      studio:
+        type: string
+      title:
+        type: string
+    title: GameViewModel
+  InvoiceViewModel:
+    type: object
+    properties:
+      city:
+        type: string
+      invoice_id:
+        type: integer
+        format: int32
+      item_id:
+        type: integer
+        format: int32
+      item_type:
+        type: string
+      name:
+        type: string
+      processing_fee:
+        type: number
+      quantity:
+        type: integer
+        format: int32
+      state:
+        type: string
+      street:
+        type: string
+      subtotal:
+        type: number
+      tax:
+        type: number
+      total:
+        type: number
+      unit_price:
+        type: number
+      zipcode:
+        type: string
+    title: InvoiceViewModel
+  TShirtViewModel:
+    type: object
+    properties:
+      color:
+        type: string
+      description:
+        type: string
+      price:
+        type: number
+      quantity:
+        type: integer
+        format: int32
+      size:
+        type: string
+      t_shirt_id:
+        type: integer
+        format: int32
+    title: TShirtViewModel
